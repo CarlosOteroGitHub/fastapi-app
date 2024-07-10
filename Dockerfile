@@ -1,24 +1,24 @@
 # pull official base image
 FROM python:3.8.1-alpine
 
-# set work directory
-WORKDIR /src
-
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# copy requirements file
-COPY ./requirements.txt /src/requirements.txt
+# set work directory
+WORKDIR /application
+COPY . /application
 
-# install dependencies
-RUN set -eux \
-    && apk add --no-cache --virtual .build-deps build-base \
-    libressl-dev libffi-dev gcc musl-dev python3-dev \
-    postgresql-dev \
-    && pip install --upgrade pip setuptools wheel \
-    && pip install -r /src/requirements.txt \
-    && rm -rf /root/.cache/pip
+RUN useradd -m -r user_fastapi && \
+    chown user_fastapi /application
 
-# copy project
-COPY . /src/
+RUN python3 -m pip install --no-cache-dir --upgrade pip==23.3 && \
+    python3 -m pip install --no-cache-dir -r requirements.txt --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org
+
+EXPOSE 8080
+USER user_fastapi
+
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3\
+    CMD curl -f http://localhost/ || exit 1
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
