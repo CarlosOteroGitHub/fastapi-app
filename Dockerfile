@@ -15,7 +15,7 @@ RUN useradd -m -r user_fastapi && \
 RUN python3 -m pip install --no-cache-dir --upgrade pip==23.3 && \
     python3 -m pip install --no-cache-dir -r requirements.txt --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org
 
-EXPOSE 8080
+EXPOSE 8000
 USER user_fastapi
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3\
