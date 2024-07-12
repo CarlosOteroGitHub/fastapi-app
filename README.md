@@ -9,7 +9,7 @@ A simple example of using Fast API in Python.
 ## Clone the project
 
 ```
-git clone https://github.com/marciovrl/fastapi-example.git
+git clone https://github.com/CarlosOteroGitHub/fastapi-app.git/
 ```
 
 ## Run local
@@ -23,13 +23,13 @@ pip install -r requirements.txt
 ### Run server
 
 ```
-uvicorn app.main:app --reload
+uvicorn app.main:app --host=localhost --port=8000 --reload
 ```
 
 ### Run test
 
 ```
-pytest app/test.py
+pytest test/test.py
 ```
 
 ## Run with docker
