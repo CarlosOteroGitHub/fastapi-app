@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Márcio",
+    "name": "Mauricio",
     "mail": "example@mail.com",
     "phone": "98769878"
   },
@@ -10,5 +10,11 @@
     "name": "Leandro",
     "mail": "example_leandro@mail.com",
     "phone": "94435676"
+  },
+  {
+    "id": 3,
+    "name": "Charly",
+    "mail": "example_charly@mail.com",
+    "phone": "4748349204"
   }
 ]
